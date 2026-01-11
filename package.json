@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend learning",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "homepage": "https://github.com/bhushan4work/backend#readme",
+  "bugs": {
+    "url": "https://github.com/bhushan4work/backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhushan4work/backend.git"
+  },
+  "license": "ISC",
+  "author": "bhushan agrawal",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  }
+}
