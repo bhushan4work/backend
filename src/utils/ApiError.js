@@ -6,11 +6,11 @@ class ApiError extends Error {
         statck = ""
     ){
         //we overwrite here
-        super(message) ,
+        super(message),
         this.statusCode = statusCode,
-        this.data = null ,
+        this.data = null,
         this.message = message,
-        this.success = false ,
+        this.success = false,
         this.errors = errors
 
         if(statck){

@@ -15,7 +15,6 @@ app.use(express.json({limit: "16kb"}))
 //url is encoded into long stings so to manage that we do .urlencoded
 app.use(express.urlencoded({extended: true , limit: "16kb"})) //things inside obj are options(not compulsion to add)
 app.use(express.static("public"))
-app.use(cookieParser()) 
-
+app.use(cookieParser())
 
 export { app };

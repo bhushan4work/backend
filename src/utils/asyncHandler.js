@@ -12,7 +12,7 @@ export {asyncHander} //export the method above
 
 
 //meth2- using try& catch
-// higher order fxn: fxn is passed again into another fxn & made it async
+// higher order fxn: fxn that takes another fxn as an argument and possibly returns a new fxn
 // const asyncHandlerr = (fxn) => async  (req,res,next) => {
 //     try {
 //         await fxn(req,res,next)
