@@ -6,7 +6,19 @@ dotenv.config({
     path: "./env"
 });
 
-connectDB();
+connectDB() // when asynchronousMethod i.e connectDB completes , it returns a promise & so we do this
+    .then(() => {
+        app.on("error", (error) => { //listening for errors on app 
+            console.log("ERROR", error);
+            throw error;
+        })
+        app.listen(process.env.PORT || 8000, () => { //means if process.env.PORT doesnt work we can go with PORT:8000
+            console.log(`server is running at port: ${process.env.PORT}`);
+        })
+    })
+    .catch((err) => {
+        console.log(" mongo db connection failed !!!", err);
+    })
 
 
 
@@ -35,4 +47,4 @@ const app = express();
         throw error;
     }
 })()
-*/ 
+*/
