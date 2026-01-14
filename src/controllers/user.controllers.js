@@ -18,7 +18,7 @@ const registerUser = asyncHandler(async (req, res) => {
     //return response
 
     const { fullname, email, username, password } = req.body; //helps getting details from user
-    console.log("email: ", email);
+    //console.log("email: ", email);
 
     if( //if any of this is empty it returns true, (this can also be done by individual if else)
         [fullname,email,username,password].some( (field) => field?.trim() === "")
@@ -26,7 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(400, "All fields are required")
     }
 
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or: [{username} , {email}]  //$or is used to check more than 1 value, returns bool
     })
     if(existedUser){
@@ -34,7 +34,13 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const avatarLocalPath = req.files?.avatar[0]?.path; //given by multer, [0] is 1st property
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    //const coverImageLocalPath = req.files?.coverImage[0]?.path;
+
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
+
     if(!avatarLocalPath){
         throw new ApiError(404, "avatar files is required")
     }
@@ -56,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
         username: username.toLowerCase()
     })
 
-    const createdUser = User.findById(user._id).select(
+    const createdUser = await User.findById(user._id).select(
         //here we write the ones we dont want or wanna remove, & so we use '-' before 
         "-password -refreshToken" 
     )

@@ -4,7 +4,7 @@ import connectDB from "./db/index.js";
 import {app} from './app.js';
 
 dotenv.config({
-    path: "./env"
+    path: "./.env"
 });
 
 connectDB() // when asynchronousMethod i.e connectDB completes , it returns a promise & so we do this

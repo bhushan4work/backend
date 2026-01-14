@@ -12,7 +12,7 @@ const userSchema = new Schema(
             trim: true,
             index: true //used to make it searchable in DB, makes it  more optimal
         },
-         email:{
+        email:{
             type: String,
             lowercase: true,
             required: true,
@@ -59,7 +59,7 @@ userSchema.pre("save" , async  function (next){ //next is a flag & is called aft
     if(!this.isModified("password")) return next() ;
      
     this.password = await bcrypt.hash(this.password, 10)  //'10' tells bcrypt how many times to run hashing algo internally
-    next()
+    //next() , new Mongoose automatically calls next() so dont call it again here
 })
 
 //make custom methods
@@ -76,7 +76,7 @@ userSchema.methods.generateAccessToken = function(){
             username: this.username,
             fullname: this.fullname
        },
-       proces.env.ACCESS_TOKEN_SECRET,
+       process.env.ACCESS_TOKEN_SECRET,
        {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
        }
@@ -87,7 +87,7 @@ userSchema.methods.generateRefreshToken = function(){
         {
             _id: this._id //as refreshToken refreshes often so we keep  only id here
         },
-       proces.env.REFRESH_TOKEN_SECRET   ,
+       process.env.REFRESH_TOKEN_SECRET ,
        {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
        }
