@@ -58,7 +58,7 @@ userSchema.pre("save" , async  function (next){ //next is a flag & is called aft
     //as we dont want pass to change each time we save info, we add a if condition
     if(!this.isModified("password")) return next() ;
      
-    this.password = bcrypt.hash(this.password, 10)  //'10' tells bcrypt how many times to run hashing algo internally
+    this.password = await bcrypt.hash(this.password, 10)  //'10' tells bcrypt how many times to run hashing algo internally
     next()
 })
 
