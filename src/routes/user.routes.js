@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {registerUser} from "../controllers/user.controllers.js";
+import {loginUser, registerUser} from "../controllers/user.controllers.js";
 import {upload} from "../middlewares/multer.middlewares.js";
 
 //just as we made 'app' with express, in same way me make a router now
@@ -20,5 +20,11 @@ router.route("/register").post(
     ]) ,
     registerUser
 )
+
+router.route("/login").post(loginUser)
+
+//secured routes
+router.route("/logout").post(verifyJWT, logoutUser) 
+
 
 export default router
