@@ -56,7 +56,7 @@ const userSchema = new Schema(
 //& for middlewear we'll need context from user ,also this process req lot of time so async is used
 userSchema.pre("save" , async  function (next){ //next is a flag & is called after job is done
     //as we dont want pass to change each time we save info, we add a if condition
-    if(!this.isModified("password")) return next() ;
+    if(!this.isModified("password")) return ;
      
     this.password = await bcrypt.hash(this.password, 10)  //'10' tells bcrypt how many times to run hashing algo internally
     //next() , new Mongoose automatically calls next() so dont call it again here

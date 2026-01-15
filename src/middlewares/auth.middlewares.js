@@ -1,9 +1,9 @@
 //this middleware will just verify if user is there or not
 
-import { ApiError } from "../utils/ApiError"
-import { asyncHandler } from "../utils/asyncHandler"
-import jwt from "jsonwebtoken"
-import {User} from "../models/user.models.js"
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import jwt from "jsonwebtoken";
+import {User} from "../models/user.models.js";
 
 
 //there can be places where any one of the 3 req\res\next is not in use
